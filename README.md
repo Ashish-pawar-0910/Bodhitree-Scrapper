@@ -14,5 +14,9 @@ If you want to use any other browser, download the driver from the below links.
 
 # Usage
 Clone the repo.
+
 Provide your credentials in the resources.py file in the assets folder.
-Use the command ``` python bt-scrapper.py ``` to run program.
+
+Use the command below to run program.
+
+``` python bt-scrapper.py ```
