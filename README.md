@@ -1,7 +1,7 @@
 # Bodhitree-Scrapper
 A simple script to notify about pending quizzes and assignments(in progress).
 
-This script uses Chrome version 86. If you have some other version, then download the respective driver from the below link and place it in the assets folder.
+This script uses Chrome version 86. If you have some other version, then download it's driver from the below link and place it in the assets folder.
 https://sites.google.com/a/chromium.org/chromedriver/downloads
 
 If you want to use any other browser, download the driver from the below links.
