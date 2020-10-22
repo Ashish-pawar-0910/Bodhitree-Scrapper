@@ -1,17 +1,22 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.options import Options
 from assets import resource
 import subprocess
 
 # This is done to sync this file to the resources file in the assets folder
 subprocess.Popen(["git", "pull"], stdout=subprocess.PIPE)
 
+try:
+    browser = webdriver.Chrome(executable_path="assets/chromedriver")
+except:
+    try:
+        browser = webdriver.Chrome(executable_path="assets\\chromedriver_windows.exe")
+    except:
+        print("ERROR: Place the appropriate web driver in the assets folder")
+
 print("The process usually takes 1-2 minutes! (Don't interfere)\n")
 
-browser = webdriver.Chrome(executable_path="./assets/chromedriver")
 browser.maximize_window()
 browser.get("https://pccoe.bodhi-tree.in/accounts/login/")
 
@@ -40,16 +45,19 @@ for tab in browser.window_handles:
         visited.append(tab)
 
         leaderboard = browser.find_element_by_css_selector("#sideList-score-card").click()
-        scores = [
-            score.text.split("\n")
-            for score in WebDriverWait(browser, timeout=20).until(
-                lambda b: b.find_elements_by_css_selector(".panel-title")
-            )
-        ]
+        try:
+            scores = [
+                score.text.split("\n")
+                for score in WebDriverWait(browser, timeout=20).until(
+                    lambda b: b.find_elements_by_css_selector(".panel-title")
+                )
+            ]
+        except:
+            print("ERROR: Connection Error!")
 
         course_title = browser.find_element_by_css_selector(".courseTitle").text
-        expected_out_video_score = (int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.0.1']").text) - resource.balance[course_title][0])
-        expected_in_video_score = (int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.1.1']").text)- resource.balance[course_title][1])
+        expected_out_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.0.1']").text) - resource.balance[course_title][0]
+        expected_in_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.1.1']").text)- resource.balance[course_title][1]
 
         for i in scores:
             if i[1] == name:
@@ -59,7 +67,7 @@ for tab in browser.window_handles:
 
                 if expected_out_video_score > out_video_score:
                     print("Course Name:", course_title)
-                    print("Remaining out video score:",expected_out_video_score - int(i[3]),)
+                    print("Remaining out video score:",expected_out_video_score - int(i[3]))
                     title_printed = True
 
                 if expected_in_video_score > in_video_score:
@@ -71,4 +79,6 @@ for tab in browser.window_handles:
                 if title_printed:
                     print("")
                 break
-            
+                
+if title_printed == False:
+    print("Well Done! All quizzes completed.\n")    
