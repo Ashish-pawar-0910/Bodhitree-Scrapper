@@ -22,3 +22,4 @@ Use the command below to run program.
 ``` 
 python bt-scrapper.py 
 ```
+If you are on linux **and** using the driver from the assets folder, set the driver executable by ``` chmod +x <driver name>```

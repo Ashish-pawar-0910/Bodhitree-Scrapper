@@ -8,12 +8,12 @@ import subprocess
 subprocess.Popen(["git", "pull"], stdout=subprocess.PIPE)
 
 try:
-    browser = webdriver.Chrome(executable_path="assets/chromedriver_linux")
+    browser = webdriver.Chrome(executable_path="./assets/chromedriver_linux")
 except:
     try:
         browser = webdriver.Chrome(executable_path="assets\\chromedriver_windows.exe")
     except:
-        print("ERROR: Place the appropriate web driver in the assets folder")
+        raise Exception("ERROR: Place the appropriate web driver in the assets folder")
 
 print("The process usually takes 1-2 minutes! (Don't interfere)\n")
 
@@ -56,8 +56,15 @@ for tab in browser.window_handles:
             print("ERROR: Connection Error!")
 
         course_title = browser.find_element_by_css_selector(".courseTitle").text
-        expected_out_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.0.1']").text) - resource.balance[course_title][0]
-        expected_in_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.1.1']").text)- resource.balance[course_title][1]
+
+        imbalanced = False
+        try:
+            expected_out_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.0.1']").text) - resource.balance[course_title][0]
+            expected_in_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.1.1']").text) - resource.balance[course_title][1]
+        except:
+            expected_out_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.0.1']").text)
+            expected_in_video_score = int(browser.find_element_by_xpath("//span[@data-reactid='.1.1.0.0.0.0.1.0.1.1']").text)
+            imbalanced = True
 
         for i in scores:
             if i[1] == name:
@@ -80,5 +87,7 @@ for tab in browser.window_handles:
                     print("")
                 break
 
+if imbalanced:
+    print("If possible, update the resource.py file in the assets folder with your course!")
 if title_printed == False:
     print("Well Done! All quizzes completed.\n")    
