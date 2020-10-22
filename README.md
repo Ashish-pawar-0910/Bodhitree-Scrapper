@@ -19,4 +19,6 @@ Provide your credentials in the resources.py file in the assets folder.
 
 Use the command below to run program.
 
-``` python bt-scrapper.py ```
+``` 
+python bt-scrapper.py 
+```
