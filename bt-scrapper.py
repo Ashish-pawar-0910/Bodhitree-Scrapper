@@ -8,7 +8,7 @@ import subprocess
 subprocess.Popen(["git", "pull"], stdout=subprocess.PIPE)
 
 try:
-    browser = webdriver.Chrome(executable_path="assets/chromedriver")
+    browser = webdriver.Chrome(executable_path="assets/chromedriver_linux")
 except:
     try:
         browser = webdriver.Chrome(executable_path="assets\\chromedriver_windows.exe")
@@ -79,6 +79,6 @@ for tab in browser.window_handles:
                 if title_printed:
                     print("")
                 break
-                
+
 if title_printed == False:
     print("Well Done! All quizzes completed.\n")    
