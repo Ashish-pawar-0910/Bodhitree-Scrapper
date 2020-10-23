@@ -6,7 +6,6 @@ import subprocess
 # This is done to sync this file to the resources file in the assets folder
 subprocess.Popen(["git", "pull"], stdout=subprocess.PIPE)
 
-######################################################################################################
 # Enter login credentials
 email = ""
 password = ""
@@ -30,8 +29,6 @@ balance = {
     "DELD Theory SE COMP Div B-Dr. Ranjanikar": [0, 0],
     "Computer Graphics": [0, 0],
 }
-
-###############################################################################################
 
 try:
     browser = webdriver.Chrome(executable_path="./assets/chromedriver_linux")
