@@ -22,4 +22,6 @@ Use the command below to run program.
 ``` 
 python bt-scrapper.py 
 ```
+Selenium is required for the script to run. You can install it with ```pip install -U selenium```
+
 If you are on linux **and** using the driver from the assets folder, set the driver executable by ``` chmod +x <driver name>```
