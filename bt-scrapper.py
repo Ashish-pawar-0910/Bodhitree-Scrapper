@@ -7,6 +7,10 @@ import subprocess
 # This is done to sync this file to the resources file in the assets folder
 subprocess.Popen(["git", "pull"], stdout=subprocess.PIPE)
 
+# Enter login credentials
+email = ""
+password = ""
+
 try:
     browser = webdriver.Chrome(executable_path="./assets/chromedriver_linux")
 except:
@@ -22,9 +26,9 @@ browser.get("https://pccoe.bodhi-tree.in/accounts/login/")
 
 # Entering Credentials
 browser.find_element_by_id("signinUsername").clear()
-browser.find_element_by_id("signinUsername").send_keys(resource.email + Keys.RETURN)
+browser.find_element_by_id("signinUsername").send_keys(email + Keys.RETURN)
 browser.find_element_by_id("signinPassword").clear()
-browser.find_element_by_id("signinPassword").send_keys(resource.password + Keys.RETURN)
+browser.find_element_by_id("signinPassword").send_keys(password + Keys.RETURN)
 
 # Student's name
 name = (WebDriverWait(browser, timeout=15).until(lambda b: b.find_element_by_css_selector(".dropdown-toggle")).text)

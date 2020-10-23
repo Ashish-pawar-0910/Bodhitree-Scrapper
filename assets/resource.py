@@ -1,7 +1,3 @@
-# Login Credentials
-email = ""
-password = ""
-
 """
 Sometimes, the given expected score for Bodhitree quizzes is different from the actual expected score. This is because
 (Bodhitree is shit) the number of attempts/scores fluctuate or the content gets boom! So to balance those changes, a per subject fluctuation has to be maintained.
