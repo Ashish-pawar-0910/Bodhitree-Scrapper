@@ -151,7 +151,7 @@ def main():
                     break
 
     if imbalanced:
-        print("If possible, update the resource.py file in the assets folder with your course!")
+        print("If possible, add your course fluctuation value in the balance dictionary above")
     if title_printed == False:
         print("Well Done! All quizzes completed.\n")
 
