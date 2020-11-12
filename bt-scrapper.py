@@ -155,5 +155,7 @@ def main():
     if title_printed == False:
         print("Well Done! All quizzes completed.\n")
 
+    browser.quit()
+
 
 main()
